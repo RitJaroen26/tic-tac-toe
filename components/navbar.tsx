@@ -39,7 +39,7 @@ export default function Navbar() {
                                     🎮
                                 </div>
                                 <div>
-                                    <h1 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-400 bg-clip-text text-transparent tracking-tight">
+                                    <h1 className="hidden md:block text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-400 bg-clip-text text-transparent tracking-tight">
                                         RafficToe
                                     </h1>
                                     <p className="text-xs text-indigo-400 font-semibold tracking-wide hidden md:block">
@@ -56,7 +56,7 @@ export default function Navbar() {
                                 onClick={() => handleNavigation("/", "home")}
                             />
                             <NavLink
-                                label="Single Player"
+                                label="Singleplayer"
                                 icon="🤖"
                                 active={activeLink === "single"}
                                 onClick={() => handleNavigation("/single-player", "single")}

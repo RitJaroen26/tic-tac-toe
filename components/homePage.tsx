@@ -53,7 +53,7 @@ export default function HomePage() {
                     <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[600px] h-[200px] bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-[100px] animate-pulse"></div>
 
                     <div className="relative">
-                        <h1 className="text-8xl md:text-9xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-400 bg-clip-text text-transparent mb-4 tracking-tight drop-shadow-[0_0_50px_rgba(99,102,241,0.6)] select-none">
+                        <h1 className="text-5xl sm:text-7xl md:text-9xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-400 bg-clip-text text-transparent mb-4 tracking-tight drop-shadow-[0_0_50px_rgba(99,102,241,0.6)] select-none">
                             RafficToe
                         </h1>
 
@@ -69,17 +69,17 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-6 w-full max-w-md">
+                <div className="flex flex-col gap-6 w-full max-w-sm">
                     <button
                         onClick={() => router.push("/single-player")}
                         onMouseEnter={() => setHoveredButton('single')}
                         onMouseLeave={() => setHoveredButton(null)}
-                        className="group relative overflow-hidden"
+                        className="group relative overflow-hidden rounded-3xl"
                     >
                         <div className={`absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl transition-all duration-500 ${hoveredButton === 'single' ? 'opacity-80 animate-pulse' : 'opacity-60'
                             }`}></div>
 
-                        <div className={`relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl px-12 py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'single'
+                        <div className={`relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl px-2 md:px-6 py-2 md:py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'single'
                             ? 'border-cyan-300 scale-105 shadow-[0_0_40px_rgba(6,182,212,0.5)]'
                             : 'border-cyan-400/30 scale-100'
                             }`}>
@@ -89,13 +89,13 @@ export default function HomePage() {
                             </div>
 
                             <div className="relative flex items-center justify-center gap-4">
-                                <div className={`text-4xl transition-transform duration-300 ${hoveredButton === 'single' ? 'scale-125 rotate-12' : 'scale-100'
+                                <div className={`text-2xl sm:text-4xl transition-transform duration-300 ${hoveredButton === 'single' ? 'scale-125 rotate-12' : 'scale-100'
                                     }`}>
                                     🤖
                                 </div>
 
                                 <div className="text-left">
-                                    <div className="text-3xl font-black text-white tracking-wide drop-shadow-lg">
+                                    <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
                                         Single Player
                                     </div>
                                     <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
@@ -110,12 +110,12 @@ export default function HomePage() {
                         onClick={() => router.push("/multi-player")}
                         onMouseEnter={() => setHoveredButton('multi')}
                         onMouseLeave={() => setHoveredButton(null)}
-                        className="group relative overflow-hidden"
+                        className="group relative overflow-hidden rounded-3xl"
                     >
                         <div className={`absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl blur-xl transition-all duration-500 ${hoveredButton === 'multi' ? 'opacity-80 animate-pulse' : 'opacity-60'
                             }`}></div>
 
-                        <div className={`relative bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl px-12 py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'multi'
+                        <div className={`relative bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl px-2 md:px-6 py-2 md:py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'multi'
                             ? 'border-pink-300 scale-105 shadow-[0_0_40px_rgba(236,72,153,0.5)]'
                             : 'border-pink-400/30 scale-100'
                             }`}>
@@ -126,13 +126,13 @@ export default function HomePage() {
 
                             <div className="relative flex items-center justify-center gap-4">
                                 {/* Icon */}
-                                <div className={`text-4xl transition-transform duration-300 ${hoveredButton === 'multi' ? 'scale-125 rotate-12' : 'scale-100'
+                                <div className={`text-2xl md:text-4xl transition-transform duration-300 ${hoveredButton === 'multi' ? 'scale-125 rotate-12' : 'scale-100'
                                     }`}>
                                     👥
                                 </div>
 
                                 <div className="text-left">
-                                    <div className="text-3xl font-black text-white tracking-wide drop-shadow-lg">
+                                    <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
                                         Multiplayer
                                     </div>
                                     <div className="text-sm text-pink-100 font-semibold tracking-wide opacity-90">
