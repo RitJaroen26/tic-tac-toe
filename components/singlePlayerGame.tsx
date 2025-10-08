@@ -13,6 +13,7 @@ export default function SinglePlayerGame() {
     const [winningLine, setWinningLine] = useState<number[] | undefined>(undefined);
     const [status, setStatus] = useState("Your turn (X)");
     const [score, setScore] = useState({ player: 0, ai: 0, draws: 0 });
+    const [lastWinner, setLastWinner] = useState<string | null>(null); 
 
     useEffect(() => {
         if (!xIsNext && !winner) {
@@ -25,10 +26,12 @@ export default function SinglePlayerGame() {
                     const result = checkWinner(newBoard);
                     if (result.winner) {
                         setWinner(result.winner);
+                        setLastWinner(result.winner);
                         setWinningLine(result.line ?? undefined);
                         setStatus(result.winner === "O" ? "AI Victory!" : `${result.winner} wins!`);
                     } else if (!newBoard.includes("")) {
                         setWinner("draw");
+                        setLastWinner("draw"); 
                         setWinningLine(undefined);
                         setStatus("Perfect Draw");
                     } else {
@@ -64,11 +67,13 @@ export default function SinglePlayerGame() {
         if (result.winner === "X") {
             setBoard(newBoard);
             setWinner(result.winner);
+            setLastWinner(result.winner);
             setWinningLine(result.line ?? undefined);
             setStatus(`${result.winner} wins!`);
         } else if (!newBoard.includes("")) {
             setBoard(newBoard);
             setWinner("draw");
+            setLastWinner("draw");
             setWinningLine(undefined);
             setStatus("Draw!");
         } else {
@@ -78,13 +83,21 @@ export default function SinglePlayerGame() {
         }
     };
 
-
     const resetGame = () => {
         setBoard(Array(9).fill(""));
-        setXIsNext(true);
         setWinner(null);
         setWinningLine(undefined);
-        setStatus("Your turn (X)");
+        
+        if (lastWinner === "X") {
+            setXIsNext(true);
+            setStatus("Your turn (X)");
+        } else if (lastWinner === "O") {
+            setXIsNext(false);
+            setStatus("AI starts...");
+        } else {
+            setXIsNext(true);
+            setStatus("Your turn (X)");
+        }
     };
 
     return (
@@ -168,7 +181,7 @@ export default function SinglePlayerGame() {
 
                 <button
                     onClick={resetGame}
-                    className="relative group px-12 py-5 text-white text-xl font-black rounded-3xl overflow-hidden transition-all duration-300 hover:scale-105"
+                    className="relative group cursor-pointer px-12 py-5 text-white text-xl font-black rounded-3xl overflow-hidden transition-all duration-300 hover:scale-105"
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 group-hover:from-purple-500 group-hover:via-indigo-500 group-hover:to-purple-500 transition-all"></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-400/0 via-white/30 to-purple-400/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
