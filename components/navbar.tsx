@@ -75,7 +75,6 @@ export default function Navbar() {
                             />
                         </div>
 
-                        {/* Mobile Menu Button */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="md:hidden relative group p-2"

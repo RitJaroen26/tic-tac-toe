@@ -13,7 +13,8 @@ export default function SinglePlayerGame() {
     const [winningLine, setWinningLine] = useState<number[] | undefined>(undefined);
     const [status, setStatus] = useState("Your turn (X)");
     const [score, setScore] = useState({ player: 0, ai: 0, draws: 0 });
-    const [lastWinner, setLastWinner] = useState<string | null>(null); 
+    const [lastWinner, setLastWinner] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if (!xIsNext && !winner) {
@@ -31,7 +32,7 @@ export default function SinglePlayerGame() {
                         setStatus(result.winner === "O" ? "AI Victory!" : `${result.winner} wins!`);
                     } else if (!newBoard.includes("")) {
                         setWinner("draw");
-                        setLastWinner("draw"); 
+                        setLastWinner("draw");
                         setWinningLine(undefined);
                         setStatus("Perfect Draw");
                     } else {
@@ -87,7 +88,7 @@ export default function SinglePlayerGame() {
         setBoard(Array(9).fill(""));
         setWinner(null);
         setWinningLine(undefined);
-        
+
         if (lastWinner === "X") {
             setXIsNext(true);
             setStatus("Your turn (X)");
@@ -99,6 +100,14 @@ export default function SinglePlayerGame() {
             setStatus("Your turn (X)");
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-12 h-12 border-4 border-gray-200 border-t-[#4cc1b3] rounded-full animate-spin"></div>
+            </div>
+        )
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 flex items-center justify-center p-8 relative overflow-hidden">

@@ -6,7 +6,15 @@ import Particles from "./particles";
 
 export default function HomePage() {
     const [hoveredButton, setHoveredButton] = useState<'single' | 'multi' | null>(null);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
+
+    const handleSinglePlayer = () => {
+        setLoading(true);
+        setTimeout(() => {
+            router.push("/single-player");
+        }, 800);
+    };
 
     return (
         <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 overflow-hidden">
@@ -68,10 +76,10 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-
+                
                 <div className="flex flex-col gap-6 w-full max-w-sm">
                     <button
-                        onClick={() => router.push("/single-player")}
+                        onClick={handleSinglePlayer}
                         onMouseEnter={() => setHoveredButton('single')}
                         onMouseLeave={() => setHoveredButton(null)}
                         className="group relative overflow-hidden rounded-3xl"
@@ -89,18 +97,23 @@ export default function HomePage() {
                             </div>
 
                             <div className="relative flex items-center justify-center gap-4">
-                                <div className={`text-2xl sm:text-4xl transition-transform duration-300 ${hoveredButton === 'single' ? 'scale-125 rotate-12' : 'scale-100'
-                                    }`}>
-                                    🤖
-                                </div>
+                                {loading ? (
+                                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                                ) : (
+                                    <div className={`text-2xl sm:text-4xl ${hoveredButton === 'single' ? 'scale-125 rotate-12' : 'scale-100'} transition-transform`}>
+                                        🤖
+                                    </div>
+                                )}
 
                                 <div className="text-left">
                                     <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
-                                        Single Player
+                                        {loading ? "Loading..." : "Singleplayer"}
                                     </div>
-                                    <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
-                                        Challenge the AI
-                                    </div>
+                                    {!loading && (
+                                        <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
+                                            Challenge the AI
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -125,19 +138,22 @@ export default function HomePage() {
                             </div>
 
                             <div className="relative flex items-center justify-center gap-4">
-                                {/* Icon */}
-                                <div className={`text-2xl md:text-4xl transition-transform duration-300 ${hoveredButton === 'multi' ? 'scale-125 rotate-12' : 'scale-100'
-                                    }`}>
-                                    👥
-                                </div>
-
+                                {loading ? (
+                                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                                ) : (
+                                    <div className={`text-2xl sm:text-4xl ${hoveredButton === 'multi' ? 'scale-125 rotate-12' : 'scale-100'} transition-transform`}>
+                                        👥
+                                    </div>
+                                )}
                                 <div className="text-left">
                                     <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
-                                        Multiplayer
+                                        {loading ? "Loading..." : "Multiplayer"}
                                     </div>
-                                    <div className="text-sm text-pink-100 font-semibold tracking-wide opacity-90">
-                                        Play with Friends
-                                    </div>
+                                    {!loading && (
+                                        <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
+                                            Play with Friends
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
