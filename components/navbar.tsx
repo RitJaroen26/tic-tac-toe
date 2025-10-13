@@ -1,16 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState("home");
-
-    const handleNavigation = (path: string, linkName: string) => {
-        setActiveLink(linkName);
-        setIsMenuOpen(false);
-        console.log(`Navigating to: ${path}`);
-    };
+    const router = useRouter();
 
     return (
         <>
@@ -29,7 +25,7 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         <button
-                            onClick={() => handleNavigation("/", "home")}
+                            onClick={() => router.push('/')}
                             className="relative group flex items-center gap-3"
                         >
                             <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -49,29 +45,23 @@ export default function Navbar() {
                             </div>
                         </button>
 
-                        <div className="hidden md:flex items-center gap-2">
+                        <div className="hidden md:flex items-center">
                             <NavLink
                                 label="Home"
                                 active={activeLink === "home"}
-                                onClick={() => handleNavigation("/", "home")}
-                            />
-                            <NavLink
-                                label="Singleplayer"
-                                icon="🤖"
-                                active={activeLink === "single"}
-                                onClick={() => handleNavigation("/single-player", "single")}
-                            />
-                            <NavLink
-                                label="Multiplayer"
-                                icon="👥"
-                                active={activeLink === "multi"}
-                                onClick={() => handleNavigation("/multi-player", "multi")}
+                                onClick={() => router.push('/')}
                             />
                             <NavLink
                                 label="Leaderboard"
                                 icon="🏆"
                                 active={activeLink === "leaderboard"}
-                                onClick={() => handleNavigation("/leaderboard", "leaderboard")}
+                                onClick={() => router.push('/dashboard')}
+                            />
+                            <NavLink
+                                label="Login"
+                                icon="🏆"
+                                active={activeLink === "login"}
+                                onClick={() => router.push('/loginPage')}
                             />
                         </div>
 
@@ -93,25 +83,25 @@ export default function Navbar() {
                             <MobileNavLink
                                 label="Home"
                                 active={activeLink === "home"}
-                                onClick={() => handleNavigation("/", "home")}
+                                onClick={() => router.push('/')}
                             />
                             <MobileNavLink
                                 label="Single Player"
                                 icon="🤖"
                                 active={activeLink === "single"}
-                                onClick={() => handleNavigation("/single-player", "single")}
+                                onClick={() => router.push('single-player')}
                             />
                             <MobileNavLink
                                 label="Multiplayer"
                                 icon="👥"
                                 active={activeLink === "multi"}
-                                onClick={() => handleNavigation("/multi-player", "multi")}
+                                onClick={() => router.push('multi-player')}
                             />
                             <MobileNavLink
                                 label="Leaderboard"
                                 icon="🏆"
                                 active={activeLink === "leaderboard"}
-                                onClick={() => handleNavigation("/leaderboard", "leaderboard")}
+                                onClick={() => router.push('loginPage')}
                             />
                         </div>
                     </div>

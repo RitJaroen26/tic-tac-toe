@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Board from "./board";
 import { GetAIMove } from "@/lib/ai";
@@ -15,12 +16,19 @@ export default function SinglePlayerGame() {
     const [score, setScore] = useState({ player: 0, ai: 0, draws: 0 });
     const [lastWinner, setLastWinner] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [timeLeft, setTimeLeft] = useState<number>(3);
+    const searchParams = useSearchParams();
+    const mode = (searchParams.get("mode") || "normal") as
+        | "easy"
+        | "normal"
+        | "hard";
+    const [difficulty, setDifficulty] = useState(mode);
 
     useEffect(() => {
         if (!xIsNext && !winner) {
             const timer = setTimeout(() => {
                 setBoard(prevBoard => {
-                    const move = GetAIMove(prevBoard);
+                    const move = GetAIMove(prevBoard, difficulty);
                     if (move === -1) return prevBoard;
                     const newBoard = [...prevBoard];
                     newBoard[move] = "O";
@@ -44,7 +52,7 @@ export default function SinglePlayerGame() {
             }, 700);
             return () => clearTimeout(timer);
         }
-    }, [xIsNext, winner]);
+    }, [xIsNext, winner, difficulty]);
 
     useEffect(() => {
         if (!winner) return;
@@ -100,6 +108,30 @@ export default function SinglePlayerGame() {
             setStatus("Your turn (X)");
         }
     };
+
+    useEffect(() => {
+        if (winner) return;
+        setTimeLeft(10);
+
+        const timer = setInterval(() => {
+            setTimeLeft(prev => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    if (xIsNext) {
+                        setXIsNext(false);
+                        setStatus("AI turn (Timeout!)");
+                    } else {
+                        setXIsNext(true);
+                        setStatus("Your turn (AI Timeout!)");
+                    }
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [xIsNext, winner]);
 
     if (loading) {
         return (
@@ -180,6 +212,17 @@ export default function SinglePlayerGame() {
                         </p>
                     </div>
                 </div>
+
+                <div className="w-64 h-3 bg-slate-700 rounded-full overflow-hidden mt-2">
+                    <div
+                        className={`h-full transition-all duration-1000 ${timeLeft <= 3 ? "bg-red-500" : "bg-green-400"}`}
+                        style={{ width: `${(timeLeft / 3) * 100}%` }}
+                    />
+                </div>
+
+                <p className="text-indigo-300 font-semibold tracking-wide">
+                    Difficulty: {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                </p>
 
                 <Board
                     squares={board}

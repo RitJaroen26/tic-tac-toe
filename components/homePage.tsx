@@ -7,12 +7,26 @@ import Particles from "./particles";
 export default function HomePage() {
     const [hoveredButton, setHoveredButton] = useState<'single' | 'multi' | null>(null);
     const [loading, setLoading] = useState(false);
+    const [showDifficulty, setShowDifficulty] = useState(false);
+    const [hoveredDifficulty, setHoveredDifficulty] = useState<string | null>(null);
     const router = useRouter();
 
     const handleSinglePlayer = () => {
+        setShowDifficulty(true);
+    };
+
+    const handleMultiPlayer = () => {
         setLoading(true);
         setTimeout(() => {
-            router.push("/single-player");
+            router.push("/multi-player");
+        }, 800);
+    };
+
+    const handleSelectDifficulty = (mode: string) => {
+        setLoading(true);
+        setShowDifficulty(false);
+        setTimeout(() => {
+            router.push(`/single-player?mode=${mode}`);
         }, 800);
     };
 
@@ -56,6 +70,174 @@ export default function HomePage() {
 
             <Particles />
 
+            {showDifficulty && (
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-lg flex justify-center items-center z-50 animate-[fadeIn_0.3s_ease]">
+                    <div className="relative max-w-lg w-full mx-4 animate-[zoomIn_0.4s_cubic-bezier(0.34,1.56,0.64,1)]">
+                        <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-indigo-500/20 to-pink-500/20 rounded-[3rem] blur-3xl animate-pulse"></div>
+
+                        <div className="relative bg-gradient-to-br from-slate-900/95 to-slate-950/95 p-8 rounded-[2.5rem] border-2 border-slate-700/50 shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+                            <div className="text-center mb-6">
+                                <div className="inline-block mb-3 animate-[float_3s_ease-in-out_infinite]">
+                                    <div className="text-5xl">🎯</div>
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-300 via-indigo-400 to-pink-400 bg-clip-text text-transparent mb-2 tracking-tight">
+                                    Choose Your Challenge
+                                </h2>
+                                <p className="text-indigo-300/80 text-base font-medium">
+                                    Select difficulty level to begin
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col gap-3 mb-6">
+                                <button
+                                    onClick={() => handleSelectDifficulty("easy")}
+                                    onMouseEnter={() => setHoveredDifficulty("easy")}
+                                    onMouseLeave={() => setHoveredDifficulty(null)}
+                                    className="relative group overflow-hidden cursor-pointer rounded-2xl"
+                                >
+                                    <div className={`absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-600 rounded-2xl blur-lg transition-all duration-300 ${hoveredDifficulty === "easy" ? "opacity-75 animate-pulse" : "opacity-50"
+                                        }`}></div>
+
+                                    <div className={`relative bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl px-6 py-4 border-2 transition-all duration-300 transform ${hoveredDifficulty === "easy"
+                                            ? "border-green-300 scale-105 shadow-[0_0_30px_rgba(34,197,94,0.4)]"
+                                            : "border-green-400/30"
+                                        }`}>
+                                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${hoveredDifficulty === "easy" ? "animate-[shimmer_1.5s_ease-in-out_infinite]" : ""
+                                                }`}></div>
+                                        </div>
+
+                                        <div className="relative flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="text-left">
+                                                    <div className="text-xl font-black text-white tracking-wide">Easy</div>
+                                                    <div className="text-xs text-green-100 font-semibold opacity-90">Perfect for beginners</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-1">
+                                                <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                                                <div className="w-2 h-2 rounded-full bg-white/30"></div>
+                                                <div className="w-2 h-2 rounded-full bg-white/30"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button
+                                    onClick={() => handleSelectDifficulty("normal")}
+                                    onMouseEnter={() => setHoveredDifficulty("normal")}
+                                    onMouseLeave={() => setHoveredDifficulty(null)}
+                                    className="relative group overflow-hidden cursor-pointer rounded-2xl"
+                                >
+                                    <div className={`absolute -inset-1 bg-gradient-to-r from-yellow-400 to-orange-600 rounded-2xl blur-lg transition-all duration-300 ${hoveredDifficulty === "normal" ? "opacity-75 animate-pulse" : "opacity-50"
+                                        }`}></div>
+
+                                    <div className={`relative bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl px-6 py-4 border-2 transition-all duration-300 transform ${hoveredDifficulty === "normal"
+                                            ? "border-yellow-300 scale-105 shadow-[0_0_30px_rgba(234,179,8,0.4)]"
+                                            : "border-yellow-400/30"
+                                        }`}>
+                                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${hoveredDifficulty === "normal" ? "animate-[shimmer_1.5s_ease-in-out_infinite]" : ""
+                                                }`}></div>
+                                        </div>
+
+                                        <div className="relative flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="text-left">
+                                                    <div className="text-xl font-black text-white tracking-wide">Normal</div>
+                                                    <div className="text-xs text-yellow-100 font-semibold opacity-90">Balanced challenge</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-1">
+                                                <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                                                <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                                                <div className="w-2 h-2 rounded-full bg-white/30"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button
+                                    onClick={() => handleSelectDifficulty("hard")}
+                                    onMouseEnter={() => setHoveredDifficulty("hard")}
+                                    onMouseLeave={() => setHoveredDifficulty(null)}
+                                    className="relative group overflow-hidden cursor-pointer rounded-2xl"
+                                >
+                                    <div className={`absolute -inset-1 bg-gradient-to-r from-red-400 to-rose-600 rounded-2xl blur-lg transition-all duration-300 ${hoveredDifficulty === "hard" ? "opacity-75 animate-pulse" : "opacity-50"
+                                        }`}></div>
+
+                                    <div className={`relative bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl px-6 py-4 border-2 transition-all duration-300 transform ${hoveredDifficulty === "hard"
+                                            ? "border-red-300 scale-105 shadow-[0_0_30px_rgba(239,68,68,0.4)]"
+                                            : "border-red-400/30"
+                                        }`}>
+                                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${hoveredDifficulty === "hard" ? "animate-[shimmer_1.5s_ease-in-out_infinite]" : ""
+                                                }`}></div>
+                                        </div>
+
+                                        <div className="relative flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="text-left">
+                                                    <div className="text-xl font-black text-white tracking-wide">Hard</div>
+                                                    <div className="text-xs text-red-100 font-semibold opacity-90">For experienced players</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-1">
+                                                <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                                                <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                                                <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+
+
+                            <button
+                                onClick={() => setShowDifficulty(false)}
+                                className="w-full cursor-pointer py-3 text-indigo-400 hover:text-indigo-300 font-bold text-base transition-colors rounded-xl hover:bg-slate-800/50"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* {showDifficulty && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50">
+                    <div className="bg-slate-900/90 p-8 rounded-3xl border border-indigo-500/50 shadow-2xl text-center max-w-sm w-full animate-[zoomIn_0.3s_ease]">
+                        <h2 className="text-3xl font-bold text-indigo-300 mb-4">
+                            Select Difficulty
+                        </h2>
+                        <div className="flex flex-col gap-4">
+                            <button
+                                onClick={() => handleSelectDifficulty("easy")}
+                                className="py-3 cursor-pointer rounded-2xl bg-green-600/80 hover:bg-green-500 transition-all font-bold text-white text-lg"
+                            >
+                                Easy
+                            </button>
+                            <button
+                                onClick={() => handleSelectDifficulty("normal")}
+                                className="py-3 cursor-pointer rounded-2xl bg-green-600/80 hover:bg-green-500 transition-all font-bold text-white text-lg"
+                            >
+                                Normal
+                            </button>
+                            <button
+                                onClick={() => handleSelectDifficulty("hard")}
+                                className="py-3 cursor-pointer rounded-2xl bg-red-600/80 hover:bg-red-500 transition-all font-bold text-white text-lg"
+                            >
+                                Hard
+                            </button>
+                            <button
+                                onClick={() => setShowDifficulty(false)}
+                                className="mt-6 text-indigo-400 hover:text-indigo-300 font-semibold"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )} */}
+
             <div className="relative z-10 flex flex-col items-center gap-16 px-8 animate-bounce-in">
                 <div className="text-center">
                     <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[600px] h-[200px] bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-[100px] animate-pulse"></div>
@@ -76,7 +258,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="flex flex-col gap-6 w-full max-w-sm">
                     <button
                         onClick={handleSinglePlayer}
@@ -120,7 +302,7 @@ export default function HomePage() {
                     </button>
 
                     <button
-                        onClick={() => router.push("/multi-player")}
+                        onClick={handleMultiPlayer}
                         onMouseEnter={() => setHoveredButton('multi')}
                         onMouseLeave={() => setHoveredButton(null)}
                         className="group relative overflow-hidden rounded-3xl"
