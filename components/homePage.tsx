@@ -99,8 +99,8 @@ export default function HomePage() {
                                         }`}></div>
 
                                     <div className={`relative bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl px-6 py-4 border-2 transition-all duration-300 transform ${hoveredDifficulty === "easy"
-                                            ? "border-green-300 scale-105 shadow-[0_0_30px_rgba(34,197,94,0.4)]"
-                                            : "border-green-400/30"
+                                        ? "border-green-300 scale-105 shadow-[0_0_30px_rgba(34,197,94,0.4)]"
+                                        : "border-green-400/30"
                                         }`}>
                                         <div className="absolute inset-0 overflow-hidden rounded-2xl">
                                             <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${hoveredDifficulty === "easy" ? "animate-[shimmer_1.5s_ease-in-out_infinite]" : ""
@@ -132,8 +132,8 @@ export default function HomePage() {
                                         }`}></div>
 
                                     <div className={`relative bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl px-6 py-4 border-2 transition-all duration-300 transform ${hoveredDifficulty === "normal"
-                                            ? "border-yellow-300 scale-105 shadow-[0_0_30px_rgba(234,179,8,0.4)]"
-                                            : "border-yellow-400/30"
+                                        ? "border-yellow-300 scale-105 shadow-[0_0_30px_rgba(234,179,8,0.4)]"
+                                        : "border-yellow-400/30"
                                         }`}>
                                         <div className="absolute inset-0 overflow-hidden rounded-2xl">
                                             <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${hoveredDifficulty === "normal" ? "animate-[shimmer_1.5s_ease-in-out_infinite]" : ""
@@ -165,8 +165,8 @@ export default function HomePage() {
                                         }`}></div>
 
                                     <div className={`relative bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl px-6 py-4 border-2 transition-all duration-300 transform ${hoveredDifficulty === "hard"
-                                            ? "border-red-300 scale-105 shadow-[0_0_30px_rgba(239,68,68,0.4)]"
-                                            : "border-red-400/30"
+                                        ? "border-red-300 scale-105 shadow-[0_0_30px_rgba(239,68,68,0.4)]"
+                                        : "border-red-400/30"
                                         }`}>
                                         <div className="absolute inset-0 overflow-hidden rounded-2xl">
                                             <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${hoveredDifficulty === "hard" ? "animate-[shimmer_1.5s_ease-in-out_infinite]" : ""
@@ -259,88 +259,85 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-6 w-full max-w-sm">
-                    <button
-                        onClick={handleSinglePlayer}
-                        onMouseEnter={() => setHoveredButton('single')}
-                        onMouseLeave={() => setHoveredButton(null)}
-                        className="group relative overflow-hidden rounded-3xl"
-                    >
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl transition-all duration-500 ${hoveredButton === 'single' ? 'opacity-80 animate-pulse' : 'opacity-60'
-                            }`}></div>
+                {loading ? (
+                    <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                    <div className="flex flex-col gap-6 w-full max-w-sm">
+                        <button
+                            onClick={handleSinglePlayer}
+                            onMouseEnter={() => setHoveredButton('single')}
+                            onMouseLeave={() => setHoveredButton(null)}
+                            className="group relative overflow-hidden rounded-3xl cursor-pointer"
+                        >
+                            <div className={`absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl transition-all duration-500 ${hoveredButton === 'single' ? 'opacity-80 animate-pulse' : 'opacity-60'
+                                }`}></div>
 
-                        <div className={`relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl px-2 md:px-6 py-2 md:py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'single'
-                            ? 'border-cyan-300 scale-105 shadow-[0_0_40px_rgba(6,182,212,0.5)]'
-                            : 'border-cyan-400/30 scale-100'
-                            }`}>
-                            <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                                <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 ${hoveredButton === 'single' ? 'animate-[shimmer_1.5s_ease-in-out_infinite]' : ''
-                                    }`} style={{ width: '100%' }}></div>
-                            </div>
+                            <div className={`relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl px-2 md:px-6 py-2 md:py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'single'
+                                ? 'border-cyan-300 scale-105 shadow-[0_0_40px_rgba(6,182,212,0.5)]'
+                                : 'border-cyan-400/30 scale-100'
+                                }`}>
+                                <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                                    <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 ${hoveredButton === 'single' ? 'animate-[shimmer_1.5s_ease-in-out_infinite]' : ''
+                                        }`} style={{ width: '100%' }}></div>
+                                </div>
 
-                            <div className="relative flex items-center justify-center gap-4">
-                                {loading ? (
-                                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                                ) : (
+                                <div className="relative flex items-center justify-center gap-4">
                                     <div className={`text-2xl sm:text-4xl ${hoveredButton === 'single' ? 'scale-125 rotate-12' : 'scale-100'} transition-transform`}>
-                                        🤖
+                                        <img src="/images/singleplayer_image.svg" alt="" className="w-10 h-10" />
                                     </div>
-                                )}
 
-                                <div className="text-left">
-                                    <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
-                                        {loading ? "Loading..." : "Singleplayer"}
-                                    </div>
-                                    {!loading && (
-                                        <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
-                                            Challenge the AI
+                                    <div className="text-left">
+                                        <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
+                                            {loading ? "Loading..." : "Singleplayer"}
                                         </div>
-                                    )}
+                                        {!loading && (
+                                            <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
+                                                Challenge the AI
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </button>
+                        </button>
 
-                    <button
-                        onClick={handleMultiPlayer}
-                        onMouseEnter={() => setHoveredButton('multi')}
-                        onMouseLeave={() => setHoveredButton(null)}
-                        className="group relative overflow-hidden rounded-3xl"
-                    >
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl blur-xl transition-all duration-500 ${hoveredButton === 'multi' ? 'opacity-80 animate-pulse' : 'opacity-60'
-                            }`}></div>
+                        <button
+                            onClick={handleMultiPlayer}
+                            onMouseEnter={() => setHoveredButton('multi')}
+                            onMouseLeave={() => setHoveredButton(null)}
+                            className="group relative overflow-hidden rounded-3xl cursor-pointer"
+                        >
+                            <div className={`absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl blur-xl transition-all duration-500 ${hoveredButton === 'multi' ? 'opacity-80 animate-pulse' : 'opacity-60'
+                                }`}></div>
 
-                        <div className={`relative bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl px-2 md:px-6 py-2 md:py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'multi'
-                            ? 'border-pink-300 scale-105 shadow-[0_0_40px_rgba(236,72,153,0.5)]'
-                            : 'border-pink-400/30 scale-100'
-                            }`}>
-                            <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                                <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 ${hoveredButton === 'multi' ? 'animate-[shimmer_1.5s_ease-in-out_infinite]' : ''
-                                    }`} style={{ width: '100%' }}></div>
-                            </div>
+                            <div className={`relative bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl px-2 md:px-6 py-2 md:py-6 shadow-2xl border-2 transition-all duration-300 transform ${hoveredButton === 'multi'
+                                ? 'border-pink-300 scale-105 shadow-[0_0_40px_rgba(236,72,153,0.5)]'
+                                : 'border-pink-400/30 scale-100'
+                                }`}>
+                                <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                                    <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 ${hoveredButton === 'multi' ? 'animate-[shimmer_1.5s_ease-in-out_infinite]' : ''
+                                        }`} style={{ width: '100%' }}></div>
+                                </div>
 
-                            <div className="relative flex items-center justify-center gap-4">
-                                {loading ? (
-                                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                                ) : (
+                                <div className="relative flex items-center justify-center gap-4">
                                     <div className={`text-2xl sm:text-4xl ${hoveredButton === 'multi' ? 'scale-125 rotate-12' : 'scale-100'} transition-transform`}>
-                                        👥
+                                        <img src="/images/multiplayer_image.svg" alt="" className="w-10 h-10" />
                                     </div>
-                                )}
-                                <div className="text-left">
-                                    <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
-                                        {loading ? "Loading..." : "Multiplayer"}
-                                    </div>
-                                    {!loading && (
-                                        <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
-                                            Play with Friends
+
+                                    <div className="text-left">
+                                        <div className="text-2xl md:text-3xl font-black text-white tracking-wide drop-shadow-lg">
+                                            {loading ? "Loading..." : "Multiplayer"}
                                         </div>
-                                    )}
+                                        {!loading && (
+                                            <div className="text-sm text-cyan-100 font-semibold tracking-wide opacity-90">
+                                                Play with Friends
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </button>
-                </div>
+                        </button>
+                    </div>
+                )}
 
                 <div className="mt-8 text-center">
                     <p className="text-indigo-400/60 text-sm font-medium tracking-wider">
