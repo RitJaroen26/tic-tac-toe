@@ -74,9 +74,11 @@ function smartMove(empty: number[], board: string[]): number {
     if (empty.includes(4)) return 4;
 
     const corners = [0, 2, 6, 8].filter((i) => empty.includes(i));
-    if (corners.length > 0)
+    
+    if (corners.length > 0) {
         return corners[Math.floor(Math.random() * corners.length)];
-
+    }
+        
     return empty[Math.floor(Math.random() * empty.length)];
 }
 

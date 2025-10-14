@@ -60,6 +60,12 @@ export default function Navbar() {
                                 active={activeLink === "login"}
                                 onClick={() => router.push('/login')}
                             />
+                            <NavLink
+                                label="My Profile"
+                                icon="🏆"
+                                active={activeLink === "profile"}
+                                onClick={() => router.push('/my-profile')}
+                            />
                         </div>
 
                         <button

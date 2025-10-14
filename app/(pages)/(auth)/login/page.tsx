@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Particles from "@/components/particles";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
     const [isLogin, setIsLogin] = useState(true);
@@ -73,7 +74,7 @@ export default function Login() {
                     <div className="flex gap-2 px-8 mb-6">
                         <button
                             onClick={() => setIsLogin(true)}
-                            className={`flex-1 py-3 rounded-xl font-bold text-base transition-all duration-300 ${isLogin
+                            className={`flex-1 cursor-pointer py-3 rounded-xl font-bold text-base transition-all duration-300 ${isLogin
                                     ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30'
                                     : 'bg-slate-800/50 text-slate-400 hover:text-slate-300'
                                 }`}
@@ -82,7 +83,7 @@ export default function Login() {
                         </button>
                         <button
                             onClick={() => setIsLogin(false)}
-                            className={`flex-1 py-3 rounded-xl font-bold text-base transition-all duration-300 ${!isLogin
+                            className={`flex-1 cursor-pointer py-3 rounded-xl font-bold text-base transition-all duration-300 ${!isLogin
                                     ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30'
                                     : 'bg-slate-800/50 text-slate-400 hover:text-slate-300'
                                 }`}
@@ -102,7 +103,7 @@ export default function Login() {
                                         <div className={`absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-xl blur transition-opacity duration-300 ${focusedField === 'username' ? 'opacity-50' : 'opacity-0'
                                             }`}></div>
                                         <div className="relative flex items-center">
-                                            <span className="absolute left-4 text-2xl">👤</span>
+                                            <span className="absolute left-4 text-2xl"><img src="/images/singleplayer_image.svg" alt="" /></span>
                                             <input
                                                 type="text"
                                                 name="username"
@@ -126,7 +127,7 @@ export default function Login() {
                                     <div className={`absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-xl blur transition-opacity duration-300 ${focusedField === 'email' ? 'opacity-50' : 'opacity-0'
                                         }`}></div>
                                     <div className="relative flex items-center">
-                                        <span className="absolute left-4 text-2xl">📧</span>
+                                        <span className="absolute left-4 text-2xl"><img src="/images/mail_image.svg" alt="" /></span>
                                         <input
                                             type="email"
                                             name="email"
@@ -149,7 +150,7 @@ export default function Login() {
                                     <div className={`absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl blur transition-opacity duration-300 ${focusedField === 'password' ? 'opacity-50' : 'opacity-0'
                                         }`}></div>
                                     <div className="relative flex items-center">
-                                        <span className="absolute left-4 text-2xl">🔒</span>
+                                        <span className="absolute left-4 text-2xl"><img src="/images/lock_image.svg" alt="" /></span>
                                         <input
                                             type="password"
                                             name="password"
@@ -173,7 +174,7 @@ export default function Login() {
                                         <div className={`absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl blur transition-opacity duration-300 ${focusedField === 'confirmPassword' ? 'opacity-50' : 'opacity-0'
                                             }`}></div>
                                         <div className="relative flex items-center">
-                                            <span className="absolute left-4 text-2xl">🔐</span>
+                                            <span className="absolute left-4 text-2xl"><img src="/images/key_image.svg" alt="" /></span>
                                             <input
                                                 type="password"
                                                 name="confirmPassword"
@@ -193,7 +194,7 @@ export default function Login() {
                                 <div className="text-right">
                                     <button
                                         type="button"
-                                        className="text-sm text-indigo-400 hover:text-indigo-300 font-semibold transition-colors"
+                                        className="cursor-pointer text-sm text-indigo-400 hover:text-indigo-300 font-semibold transition-colors"
                                     >
                                         Forgot password?
                                     </button>
@@ -222,15 +223,8 @@ export default function Login() {
                                     type="button"
                                     className="w-full flex items-center justify-center gap-3 py-3 bg-slate-800/80 hover:bg-slate-800 border-2 border-slate-700/50 hover:border-slate-600/50 rounded-xl text-white font-semibold transition-all group"
                                 >
-                                    <span className="text-2xl group-hover:scale-110 transition-transform">🔍</span>
+                                    <span className="cursor-pointer text-2xl group-hover:scale-110 transition-transform"><FcGoogle size={18} /></span>
                                     <span>Continue with Google</span>
-                                </button>
-                                <button
-                                    type="button"
-                                    className="w-full flex items-center justify-center gap-3 py-3 bg-slate-800/80 hover:bg-slate-800 border-2 border-slate-700/50 hover:border-slate-600/50 rounded-xl text-white font-semibold transition-all group"
-                                >
-                                    <span className="text-2xl group-hover:scale-110 transition-transform">👤</span>
-                                    <span>Continue as Guest</span>
                                 </button>
                             </div>
                         </div>
