@@ -202,42 +202,6 @@ export default function HomePage() {
                 </div>
             )}
 
-            {/* {showDifficulty && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50">
-                    <div className="bg-slate-900/90 p-8 rounded-3xl border border-indigo-500/50 shadow-2xl text-center max-w-sm w-full animate-[zoomIn_0.3s_ease]">
-                        <h2 className="text-3xl font-bold text-indigo-300 mb-4">
-                            Select Difficulty
-                        </h2>
-                        <div className="flex flex-col gap-4">
-                            <button
-                                onClick={() => handleSelectDifficulty("easy")}
-                                className="py-3 cursor-pointer rounded-2xl bg-green-600/80 hover:bg-green-500 transition-all font-bold text-white text-lg"
-                            >
-                                Easy
-                            </button>
-                            <button
-                                onClick={() => handleSelectDifficulty("normal")}
-                                className="py-3 cursor-pointer rounded-2xl bg-green-600/80 hover:bg-green-500 transition-all font-bold text-white text-lg"
-                            >
-                                Normal
-                            </button>
-                            <button
-                                onClick={() => handleSelectDifficulty("hard")}
-                                className="py-3 cursor-pointer rounded-2xl bg-red-600/80 hover:bg-red-500 transition-all font-bold text-white text-lg"
-                            >
-                                Hard
-                            </button>
-                            <button
-                                onClick={() => setShowDifficulty(false)}
-                                className="mt-6 text-indigo-400 hover:text-indigo-300 font-semibold"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )} */}
-
             <div className="relative z-10 flex flex-col items-center gap-16 px-8 animate-bounce-in">
                 <div className="text-center">
                     <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[600px] h-[200px] bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-[100px] animate-pulse"></div>

@@ -1,6 +1,6 @@
 "use client";
 
-export default function Register() {
+export default function MyProfile() {
     return (
         <div>
             

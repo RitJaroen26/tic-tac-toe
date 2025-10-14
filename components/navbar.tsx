@@ -58,7 +58,7 @@ export default function Navbar() {
                                 label="Login"
                                 icon="🏆"
                                 active={activeLink === "login"}
-                                onClick={() => router.push('/loginPage')}
+                                onClick={() => router.push('/login')}
                             />
                         </div>
 
@@ -83,22 +83,16 @@ export default function Navbar() {
                                 onClick={() => router.push('/')}
                             />
                             <MobileNavLink
-                                label="Single Player"
-                                icon="🤖"
-                                active={activeLink === "single"}
-                                onClick={() => router.push('single-player')}
-                            />
-                            <MobileNavLink
-                                label="Multiplayer"
-                                icon="👥"
-                                active={activeLink === "multi"}
-                                onClick={() => router.push('multi-player')}
-                            />
-                            <MobileNavLink
                                 label="Leaderboard"
                                 icon="🏆"
                                 active={activeLink === "leaderboard"}
-                                onClick={() => router.push('loginPage')}
+                                onClick={() => router.push('/dashboard')}
+                            />
+                            <MobileNavLink
+                                label="Login"
+                                icon="🏆"
+                                active={activeLink === "login"}
+                                onClick={() => router.push('login')}
                             />
                         </div>
                     </div>
