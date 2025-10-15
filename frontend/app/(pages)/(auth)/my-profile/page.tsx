@@ -565,7 +565,8 @@ function MatchCard({ match }: any) {
 
             <div className={`relative bg-gradient-to-br ${resultColors[match.result]} border-2 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 group-hover:scale-[1.02]`}>
                 <div className="flex items-center justify-between">
-                    <div className="flex flex-col md:flex-row items-center gap-5">
+                    <div className="flex flex-col md:flex-row
+                     items-center gap-5">
                         <div className="text-4xl">{resultIcons[match.result]}</div>
                         <div>
                             <div className="text-white font-black text-xl mb-1">vs {match.opponent}</div>
