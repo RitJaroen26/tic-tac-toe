@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Particles from "@/components/particles";
 import { FcGoogle } from "react-icons/fc";
+import GridBackground from "@/components/gridBackground";
 
 export default function Login() {
     const [isLogin, setIsLogin] = useState(true);
@@ -53,6 +54,7 @@ export default function Login() {
       `}</style>
 
             <Particles />
+            <GridBackground />
 
             <div className="relative w-full max-w-lg animate-slide-in">
                 <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-indigo-500/20 to-pink-500/20 rounded-[3rem] blur-3xl animate-pulse"></div>

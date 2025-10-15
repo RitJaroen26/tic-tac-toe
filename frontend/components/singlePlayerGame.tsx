@@ -6,6 +6,7 @@ import Board from "./board";
 import { GetAIMove } from "@/lib/ai";
 import { checkWinner } from "@/utils/checkWinner";
 import Particles from "./particles";
+import GridBackground from "./gridBackground";
 
 export default function SinglePlayerGame() {
     const [board, setBoard] = useState(Array(9).fill(""));
@@ -135,6 +136,7 @@ export default function SinglePlayerGame() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 flex items-center justify-center p-8 relative overflow-hidden">
             <Particles />
+            <GridBackground />
 
             <style jsx>{`
         @keyframes zoomIn {

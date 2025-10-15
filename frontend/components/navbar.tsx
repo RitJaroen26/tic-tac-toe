@@ -115,8 +115,8 @@ function NavLink({ label, icon, active, onClick }: { label: string; icon?: strin
             className="relative group px-5 py-2.5 rounded-xl transition-all duration-300"
         >
             <div className={`absolute inset-0 rounded-xl transition-all duration-300 ${active
-                    ? 'bg-gradient-to-r from-indigo-600/40 to-purple-600/40 shadow-[0_0_20px_rgba(99,102,241,0.3)]'
-                    : 'bg-slate-800/0 group-hover:bg-slate-800/60'
+                ? 'bg-gradient-to-r from-indigo-600/40 to-purple-600/40 shadow-[0_0_20px_rgba(99,102,241,0.3)]'
+                : 'bg-slate-800/0 group-hover:bg-slate-800/60'
                 }`}></div>
 
             <div className="absolute inset-0 overflow-hidden rounded-xl">
@@ -130,8 +130,8 @@ function NavLink({ label, icon, active, onClick }: { label: string; icon?: strin
             <div className="relative flex items-center gap-2">
                 {icon && <span className="text-lg">{icon}</span>}
                 <span className={`font-bold text-sm tracking-wide transition-colors ${active
-                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-pink-300'
-                        : 'text-slate-300 group-hover:text-white'
+                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-pink-300'
+                    : 'text-slate-300 group-hover:text-white'
                     }`}>
                     {label}
                 </span>
@@ -147,13 +147,13 @@ function MobileNavLink({ label, icon, active, onClick }: { label: string; icon?:
             className="relative group overflow-hidden rounded-2xl"
         >
             <div className={`absolute -inset-1 rounded-2xl blur-lg transition-all duration-300 ${active
-                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 opacity-60'
-                    : 'bg-gradient-to-r from-slate-600 to-slate-700 opacity-0 group-hover:opacity-40'
+                ? 'bg-gradient-to-r from-indigo-500 to-purple-600 opacity-60'
+                : 'bg-gradient-to-r from-slate-600 to-slate-700 opacity-0 group-hover:opacity-40'
                 }`}></div>
 
             <div className={`relative px-6 py-4 rounded-2xl border transition-all duration-300 ${active
-                    ? 'bg-gradient-to-r from-indigo-600/50 to-purple-600/50 border-indigo-400/30'
-                    : 'bg-slate-800/50 border-slate-700/30 group-hover:bg-slate-800/80'
+                ? 'bg-gradient-to-r from-indigo-600/50 to-purple-600/50 border-indigo-400/30'
+                : 'bg-slate-800/50 border-slate-700/30 group-hover:bg-slate-800/80'
                 }`}>
                 <div className="flex items-center gap-3">
                     {icon && <span className="text-2xl">{icon}</span>}

@@ -2,27 +2,26 @@
 
 import { useState, useEffect } from "react";
 import Particles from "@/components/particles";
-
-function GridBackground() {
-    return (
-        <div className="absolute inset-0 overflow-hidden opacity-5">
-            <div className="absolute inset-0" style={{
-                backgroundImage: `
-          linear-gradient(rgba(99, 102, 241, 0.5) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(99, 102, 241, 0.5) 1px, transparent 1px)
-        `,
-                backgroundSize: '60px 60px',
-                animation: 'gridMove 30s linear infinite'
-            }}></div>
-        </div>
-    );
-}
+import GridBackground from "@/components/gridBackground";
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState('stats');
     const [isEditing, setIsEditing] = useState(false);
     const [hoveredStat, setHoveredStat] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const [showHistoryModal, setShowHistoryModal] = useState(false);
+
+    useEffect(() => {
+        if (showHistoryModal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [showHistoryModal]);
 
     const userData = {
         username: "ProGamer2024",
@@ -56,7 +55,8 @@ export default function ProfilePage() {
             { id: 1, opponent: "Player123", result: "win", mode: "Hard AI", date: "2 hours ago", duration: "4:23" },
             { id: 2, opponent: "GamerPro", result: "win", mode: "Normal AI", date: "5 hours ago", duration: "3:12" },
             { id: 3, opponent: "TicTacMaster", result: "loss", mode: "Hard AI", date: "1 day ago", duration: "5:45" },
-            { id: 4, opponent: "Noob999", result: "win", mode: "Easy AI", date: "2 days ago", duration: "2:34" }
+            { id: 4, opponent: "Noob999", result: "win", mode: "Easy AI", date: "2 days ago", duration: "2:34" },
+            { id: 5, opponent: "Noob999", result: "win", mode: "Easy AI", date: "2 days ago", duration: "2:34" }
         ]
     };
 
@@ -88,6 +88,14 @@ export default function ProfilePage() {
         @keyframes rotate {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes zoomIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         .animate-float { animation: float linear infinite; }
         .animate-slide-up { animation: slideUp 0.6s ease-out; }
@@ -255,18 +263,16 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Tabs with enhanced design */}
-                <div className="flex gap-3 mb-8 overflow-x-auto pb-2">
+                <div className="flex gap-3 mb-8 justify-center overflow-x-auto pb-2">
                     <TabButton active={activeTab === 'stats'} onClick={() => setActiveTab('stats')} icon="📊" label="Statistics" />
                     <TabButton active={activeTab === 'achievements'} onClick={() => setActiveTab('achievements')} icon="🏅" label="Achievements" />
                     <TabButton active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="📜" label="Match History" />
                 </div>
 
-                {/* Enhanced Content Sections */}
                 <div className="relative">
                     <div className="absolute -inset-3 bg-gradient-to-r from-cyan-500/10 via-indigo-500/10 to-pink-500/10 rounded-[3rem] blur-3xl"></div>
 
                     <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-950/90 rounded-[3rem] border-2 border-slate-700/50 shadow-[0_30px_100px_rgba(0,0,0,0.7)] backdrop-blur-2xl p-10">
-
                         {activeTab === 'stats' && (
                             <div className="space-y-10">
                                 <div className="flex items-center gap-4 mb-8">
@@ -274,15 +280,12 @@ export default function ProfilePage() {
                                     <div className="flex-1 h-1 bg-gradient-to-r from-indigo-500/50 to-transparent rounded-full"></div>
                                 </div>
 
-                                {/* Enhanced Stats Display */}
                                 <div className="grid lg:grid-cols-2 gap-8">
-                                    {/* Win Rate Circle - Enhanced */}
                                     <div className="relative">
                                         <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl"></div>
-                                        <div className="relative bg-slate-800/50 rounded-3xl p-8 border-2 border-slate-700/50">
+                                        <div className="relative bg-slate-800/50 rounded-3xl p-2 md:p-8 border-2 border-slate-700/50">
                                             <div className="flex flex-col items-center">
                                                 <div className="relative mb-6">
-                                                    {/* Animated ring */}
                                                     <svg className="w-56 h-56 transform -rotate-90">
                                                         <circle cx="112" cy="112" r="100" fill="none" stroke="rgb(30, 41, 59)" strokeWidth="12" />
                                                         <circle
@@ -314,7 +317,6 @@ export default function ProfilePage() {
                                                     </div>
                                                 </div>
 
-                                                {/* Additional Stats */}
                                                 <div className="grid grid-cols-2 gap-4 w-full">
                                                     <div className="text-center p-4 bg-slate-900/50 rounded-xl border border-slate-700/30">
                                                         <div className="text-3xl font-black text-cyan-400">{userData.stats.avgGameTime}</div>
@@ -329,7 +331,6 @@ export default function ProfilePage() {
                                         </div>
                                     </div>
 
-                                    {/* Progress Bars - Enhanced */}
                                     <div className="space-y-6">
                                         <div className="relative">
                                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 rounded-3xl blur-2xl"></div>
@@ -343,7 +344,6 @@ export default function ProfilePage() {
                                     </div>
                                 </div>
 
-                                {/* Streak Cards - Enhanced */}
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="relative group">
                                         <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
@@ -404,14 +404,62 @@ export default function ProfilePage() {
                                     <div className="flex-1 h-1 bg-gradient-to-r from-cyan-500/50 to-transparent rounded-full"></div>
                                 </div>
                                 <div className="space-y-4">
+                                    {userData.recentMatches.slice(0, 4).map((match) => (
+                                        <MatchCard key={match.id} match={match} />
+                                    ))}
+                                </div>
+
+                                {userData.recentMatches.length > 4 && (
+                                    <div className="text-center mt-6">
+                                        <button
+                                            onClick={() => setShowHistoryModal(true)}
+                                            className="relative group overflow-hidden px-8 py-4 rounded-2xl"
+                                        >
+                                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 group-hover:from-cyan-500 group-hover:to-blue-500 transition-all"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[shimmer_1.5s_ease-in-out_infinite]"></div>
+                                            <div className="relative flex items-center gap-2 text-white font-black text-base">
+                                                <span>View Full History</span>
+                                                <span className="text-xl">📜</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {showHistoryModal && (
+                    <div className="fixed inset-0 bg-black/70 backdrop-blur-lg flex justify-center items-center z-50 p-4 animate-[fadeIn_0.3s_ease]">
+                        <div className="relative max-w-4xl w-full max-h-[80vh] animate-[zoomIn_0.4s_cubic-bezier(0.34,1.56,0.64,1)]">
+                            {/* Glow effect */}
+                            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-indigo-500/20 to-pink-500/20 rounded-[3rem] blur-3xl animate-pulse"></div>
+
+                            {/* Modal Content */}
+                            <div className="relative bg-gradient-to-br from-slate-900/95 to-slate-950/95 rounded-[2.5rem] border-2 border-slate-700/50 shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden">
+
+                                {/* Header */}
+                                <div className="flex items-center justify-between p-8 border-b border-slate-700/50">
+                                    <div className="flex items-center gap-4">
+                                        <h2 className="text-3xl font-black bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">History</h2>
+                                    </div>
+                                    <button
+                                        onClick={() => setShowHistoryModal(false)}
+                                        className="w-12 h-12 rounded-xl bg-slate-800/50 hover:bg-slate-800 border-2 border-slate-700/50 hover:border-red-500/50 text-slate-400 hover:text-red-400 transition-all flex items-center justify-center text-2xl"
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+
+                                <div className="overflow-y-auto max-h-[calc(80vh-120px)] p-8 space-y-4">
                                     {userData.recentMatches.map((match) => (
                                         <MatchCard key={match.id} match={match} />
                                     ))}
                                 </div>
                             </div>
-                        )}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
@@ -462,7 +510,6 @@ function TabButton({ active, onClick, icon, label }: any) {
     );
 }
 
-// Enhanced Progress Bar
 function ProgressBar({ label, value, max, color, icon }: any) {
     const percentage = (value / max) * 100;
     return (
@@ -486,7 +533,6 @@ function ProgressBar({ label, value, max, color, icon }: any) {
     );
 }
 
-// Enhanced Achievement Card
 function AchievementCard({ achievement }: any) {
     const rarityColors: Record<string, string> = {
         common: 'from-slate-500 to-slate-600',
@@ -508,8 +554,8 @@ function AchievementCard({ achievement }: any) {
                 <div className={`absolute -inset-1 bg-gradient-to-r ${rarityColors[achievement.rarity]} rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity animate-pulse`}></div>
             )}
             <div className={`relative p-6 rounded-3xl border-2 backdrop-blur-sm transition-all duration-300 ${achievement.unlocked
-                    ? `bg-gradient-to-br ${rarityColors[achievement.rarity]}/10 ${rarityBorders[achievement.rarity]} group-hover:scale-105`
-                    : 'bg-slate-800/50 border-slate-700/50'
+                ? `bg-gradient-to-br ${rarityColors[achievement.rarity]}/10 ${rarityBorders[achievement.rarity]} group-hover:scale-105`
+                : 'bg-slate-800/50 border-slate-700/50'
                 }`}>
                 <div className={`text-6xl mb-4 transition-transform duration-300 ${achievement.unlocked ? 'group-hover:scale-110' : ''
                     }`}>{achievement.icon}</div>
@@ -536,7 +582,6 @@ function AchievementCard({ achievement }: any) {
     );
 }
 
-// Enhanced Match Card
 function MatchCard({ match }: any) {
     const resultColors: Record<string, string> = {
         win: 'from-green-500/20 to-emerald-500/20 border-green-500/40',
@@ -559,11 +604,11 @@ function MatchCard({ match }: any) {
     return (
         <div className={`relative group`}>
             <div className={`absolute -inset-0.5 bg-gradient-to-r ${match.result === 'win' ? 'from-green-500 to-emerald-600' :
-                    match.result === 'loss' ? 'from-red-500 to-rose-600' :
-                        'from-yellow-500 to-orange-600'
+                match.result === 'loss' ? 'from-red-500 to-rose-600' :
+                    'from-yellow-500 to-orange-600'
                 } rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity`}></div>
 
-            <div className={`relative bg-gradient-to-br ${resultColors[match.result]} border-2 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 group-hover:scale-[1.02]`}>
+            <div className={`hidden md:block relative bg-gradient-to-br ${resultColors[match.result]} border-2 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 group-hover:scale-[1.02]`}>
                 <div className="flex items-center justify-between">
                     <div className="flex flex-col md:flex-row
                      items-center gap-5">
@@ -579,13 +624,34 @@ function MatchCard({ match }: any) {
                     </div>
                     <div className="text-right">
                         <div className={`text-2xl font-black uppercase tracking-wider mb-1 ${match.result === 'win' ? 'text-green-400' :
-                                match.result === 'loss' ? 'text-red-400' :
-                                    'text-yellow-400'
+                            match.result === 'loss' ? 'text-red-400' :
+                                'text-yellow-400'
                             }`}>
                             {resultText[match.result]}
                         </div>
                         <div className="text-slate-500 text-sm font-semibold">{match.date}</div>
                     </div>
+                </div>
+            </div>
+
+            <div className={`block md:hidden relative bg-gradient-to-br ${resultColors[match.result]} border-2 rounded-xl p-4 backdrop-blur-sm`}>
+                <div className="flex items-start gap-3 mb-3">
+                    <div className="flex-1 min-w-0">
+                        <div className="text-white font-bold text-sm truncate">vs {match.opponent}</div>
+                        <div className="text-slate-400 text-xs font-medium mt-0.5">🎮 {match.mode}</div>
+                    </div>
+                    <div className={`text-xs font-black uppercase ${match.result === 'win' ? 'text-green-400' :
+                        match.result === 'loss' ? 'text-red-400' :
+                            'text-yellow-400'
+                        }`}>
+                        {resultText[match.result]}
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-slate-400 font-medium pt-3 border-t border-slate-700/30">
+                    <span>📅 {match.date}</span>
+                    <span className="text-slate-600">•</span>
+                    <span>⏱️ {match.duration}</span>
                 </div>
             </div>
         </div>

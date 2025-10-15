@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Particles from "./particles";
+import GridBackground from './gridBackground';
 
 export default function HomePage() {
     const [hoveredButton, setHoveredButton] = useState<'single' | 'multi' | null>(null);
@@ -69,6 +70,7 @@ export default function HomePage() {
       `}</style>
 
             <Particles />
+            <GridBackground />
 
             {showDifficulty && (
                 <div className="fixed inset-0 bg-black/70 backdrop-blur-lg flex justify-center items-center z-50 animate-[fadeIn_0.3s_ease]">
